@@ -2,12 +2,12 @@ apiVersion: apps/v1
 
 kind: Deployment
 metadata:
-  name: sample-app
-  namespace: test
+  name: vt
+  namespace: nonprod
 spec:
   selector:
     matchLabels:
-      app: sample-app
+      app: vt
   replicas: 2
   revisionHistoryLimit: 3
   strategy:
@@ -18,11 +18,11 @@ spec:
   template:
     metadata:
       labels:
-        app: sample-app
+        app: vt
     spec:
       containers:
-      - name: sample-app
-        image: itm-registry.opthemateknoloji.com:5000/sample-app:$(Build.BuildId)v
+      - name: vt
+        image: registry.volkan.local:5000/vt:$(Build.BuildId)v
         env:
           - name: PORT
             value: "80"
@@ -30,7 +30,7 @@ spec:
         resources:
           limits:
             cpu: "1"
-            memory: 4Gi
+            memory: 1.5Gi
           requests:
             cpu: "0.5"
             memory: "1024Mi"
